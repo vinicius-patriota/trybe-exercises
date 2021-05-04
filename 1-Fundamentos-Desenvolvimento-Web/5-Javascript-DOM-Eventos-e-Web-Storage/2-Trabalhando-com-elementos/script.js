@@ -1,6 +1,8 @@
 //1 - Adicione a tag h1 com o texto Exercício 5.2 - JavaScript DOM como filho da tag body
+//    Adicione a classe title na tag h1 criada; 
 
 let h1 = document.createElement("h1");
+h1.className = "title";
 h1.innerText = "Exercício 5.2 - JavaScript DOM";
 document.querySelector("body").appendChild(h1);
 
@@ -53,13 +55,34 @@ for (let index = 0; index < 10; index += 1) {
 document.querySelector(".right-content").appendChild(ul);
 
 //9 - Adicione 3 tags h3 , todas sendo filhas do div criado no passo 2. 
+//    Adicione a classe description nas 3 tags h3 criadas.
 
-let h31 = document.createElement("h3");
-h31.innerText = "primeiro-h3";
-document.querySelector(".main-content").appendChild(h31);
-let h32 = document.createElement("h3");
-h32.innerText = "segundo-h3";
-document.querySelector(".main-content").appendChild(h32);
-let h33 = document.createElement("h3");
-h33.innerText = "terceiro-h3";
-document.querySelector(".main-content").appendChild(h33);
+let firstH3 = document.createElement("h3");
+firstH3.className = "description";
+firstH3.innerText = "primeiro-h3";
+document.querySelector(".main-content").appendChild(firstH3);
+let secondH3 = document.createElement("h3");
+secondH3.className = "description";
+secondH3.innerText = "segundo-h3";
+document.querySelector(".main-content").appendChild(secondH3);
+let thirdH3 = document.createElement("h3");
+thirdH3.className = "description";
+thirdH3.innerText = "terceiro-h3";
+document.querySelector(".main-content").appendChild(thirdH3);
+
+//    Remova o div criado no passo 5 (aquele que possui a classe left-content ). Utilize a função .removeChild() 
+
+document.querySelector(".main-content").removeChild(document.querySelector(".left-content"));
+
+//    Centralize o div criado no passo 6 (aquele que possui a classe right-content ). Dica: para centralizar, basta configurar o margin-right: auto do div 
+
+document.querySelector(".right-content").style.marginRight = "auto";
+
+//    Troque a cor de fundo do elemento pai da div criada no passo 3 (aquela que possui a classe center-content ) para a cor verde;
+
+document.querySelector(".center-content").style.background = "green";
+
+//    Remova os dois últimos elementos ( nove e dez ) da lista criada no passo 8
+
+document.querySelector("ul").removeChild(document.querySelector("ul").lastChild.previousSibling);
+document.querySelector("ul").removeChild(document.querySelector("ul").lastChild);
