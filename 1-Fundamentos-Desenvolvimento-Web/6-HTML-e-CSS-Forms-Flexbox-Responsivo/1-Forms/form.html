@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Exercicio Formulario</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: white;
+        }
+
+        input {
+            background-color: grey;
+            color: white;
+        }
+
+        textarea {
+            background-color: grey;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="form.html" method="GET">
+        <fieldset>
+            <label for="name">Digite seu nome completo:
+                <input id="name" name="name" type="text" maxlength="40" requited>
+            </label>
+            <br>
+            <label for="email">Digite seu email:
+                <input id="email" name="email" type="email" maxlength="50" requited>
+            </label>
+            <br>
+            <label for="CPF">Digite seu CPF:
+                <input id="CPF" name="CPF" type="text" maxlength="11" required>
+            </label>
+            <br>
+            <label for="address">Digite seu endereco:
+                <input id="address" name="address" type="text" maxlength="200" required>
+            </label>
+            <br>
+            <label for="city">Digite sua cidade:
+                <input id="city" name="city" type="text" maxlength="28" required>
+            </label>
+            <br>
+            <p>Selecione seu estado: </p>
+            <select id="select-estados" name="estado"></select>
+            <br>
+            <p>Tipo moradia: </p>
+            <label for="moradia-casa">
+                <input id="moradia-casa" name="moradia" type="radio" value="Casa" required>Casa
+            </label>
+            <label for="moradia-apartamento">
+                <input id="moradia-apartamento" name="moradia" type="radio" value="Apartamento" required>Apartamento
+            </label>
+        </fieldset>
+
+        <fieldset>
+            <p>Digite um resumo do seu curriculo: </p>
+            <textarea id="resumo" name="resumo" maxlength="1000" cols="75" rows="20" required></textarea>
+            <br>
+            <label for="cargo">Cargo:
+                <input id="cargo" name="cargo" type="text" maxlength="40" required>
+            </label>
+            <br>
+            <label for="descricao-cargo">Descricao do cargo:
+                <input id="descricao-cargo" name="descricao-cargo" type="text" maxlength="500" required>
+            </label>
+            <br>
+            <label for="data">Data de inicio:
+                <input id="data" name="data" type="text" maxlength="10" placeholder="dd/mm/aaaa" required>
+            </label>
+            <br><br>
+            <button id="submit" type="submit">Enviar</button>
+            <button id="limpar">Limpar</button>
+        </fieldset>
+    </form>
+
+    <fieldset id="resultado"></fieldset>
+
+    <script>
+        const estadosBrasileiros = {
+            "Acre": "AC",
+            "Alagoas": "AL",
+            "Amapá": "AP",
+            "Amazonas": "AM",
+            "Bahia": "BA",
+            "Ceará": "CE",
+            "Distrito Federal": "DF",
+            "Espírito Santo": "ES",
+            "Goiás": "GO",
+            "Maranhão": "MA",
+            "Mato Grosso": "MT",
+            "Mato Grosso Do Sul": "MS",
+            "Minas Gerais": "MG",
+            "Pará": "PA",
+            "Paraíba": "PB",
+            "Paraná": "PR",
+            "Pernambuco": "PE",
+            "Piauí": "PI",
+            "Rio De Janeiro": "RJ",
+            "Rio Grande Do Norte": "RN",
+            "Rio Grande Do Sul": "RS",
+            "Rondônia": "RO",
+            "Roraima": "RR",
+            "Santa Catarina": "SC",
+            "São Paulo": "SP",
+            "Sergipe": "SE",
+            "Tocantins": "TO",
+        }
+
+        const nomesEstados = Object.keys(estadosBrasileiros);
+        const siglasEstados = Object.keys(estadosBrasileiros);
+        let selectEstados = document.getElementById("select-estados");
+
+        for (let index = 0; index < nomesEstados.length; index += 1) {
+            let estado = document.createElement("option");
+            estado.innerText = nomesEstados[index];
+            estado.value = siglasEstados[index];
+
+            selectEstados.appendChild(estado);
+        }
+
+        const submit = document.getElementById("submit");
+        submit.addEventListener("click", function (event) {
+            event.preventDefault();
+            if (checaData()) fazCurriculo();
+        })
+
+        const limpar = document.getElementById("limpar");
+        limpar.addEventListener("click", function (event) {
+            document.getElementById("resultado").removeChild;
+
+            document.getElementById("name").value.innerText = "";
+            document.getElementById("email").value.innerText = "";
+            document.getElementById("CPF").value.innerText = "";
+            document.getElementById("city").value.innerText = "";
+            document.getElementById("address").value.innerText = "";
+            document.getElementById("select-estados").value.innerText = "";
+            document.getElementById("moradia-casa").value.innerText = "";
+            document.getElementById("moradia-apartamento").value.innerText = "";
+            document.getElementById("resumo").value.innerText = "";
+            document.getElementById("cargo").value.innerText = "";
+            document.getElementById("descricao-cargo").value.innerText = "";
+            document.getElementById("data").value.innerText = "";
+        })
+
+        function checaData() {
+            const data = document.getElementById("data");
+            const day = parseInt(data.value.slice(0, 2), 10);
+            const month = parseInt(data.value.slice(3, 5), 10);
+            const year = parseInt(data.value.slice(6, 10), 10);
+
+            if (data.value.length != 10) {
+                window.alert("Tamanho invalido de data escreva no formato dd/mm/aaaa");
+                return false;
+            }
+            if (data.value[2] != "/" || data.value[5] != "/") {
+                window.alert("Formato invalido de data escreva no formato dd/mm/aaaa");
+                return false;
+            }
+            if (day < 0 || day > 31) {
+                window.alert("Dia invalido (menor que 0 ou maior que 31)");
+                return false;
+            }
+            if (month < 0 || month > 12) {
+                window.alert("Mes invalido (menor que 0 ou maior que 12)");
+                return false;
+            }
+            if (year < 0) {
+                window.alert("Ano invalido (ano negativo)");
+                return false;
+            }
+
+            return true;
+        }
+
+        function fazCurriculo() {
+            const div = document.createElement("div");
+            div.id = "curriculo";
+            const resultado = document.getElementById("resultado");
+
+            const name = document.createElement("p");
+            name.innerText = "Nome: " + document.getElementById("name").value;
+            const email = document.createElement("p");
+            email.innerText = "Email: " + document.getElementById("email").value;
+            const address = document.createElement("p");
+            address.innerText = "Endereco: " + document.getElementById("address").value;
+            const city = document.createElement("p");
+            city.innerText = "Cidade: " + document.getElementById("city").value;
+            const CPF = document.createElement("p");
+            CPF.innerText = "CPF: " + document.getElementById("CPF").value;
+            const estado = document.createElement("p");
+            estado.innerText = "Estado: " + document.getElementById("select-estados").value;
+            const moradiaCasa = document.createElement("p");
+            moradiaCasa.innerText = "Moradia: " + document.getElementById("moradia-casa").value;
+            const moradiaApartamento = document.createElement("p");
+            moradiaApartamento.innerText = "Moradia: " + document.getElementById("moradia-apartamento").value;
+            const cargo = document.createElement("p");
+            cargo.innerText = "Cargo: " + document.getElementById("cargo").value;
+            const descricaoCargo = document.createElement("p");
+            descricaoCargo.innerText = "Descricao do cargo: " + document.getElementById("descricao-cargo").value;
+            const resumo = document.createElement("p");
+            resumo.innerText = "Resumo: " + document.getElementById("resumo").value;
+            const data = document.createElement("p");
+            data.innerText = "Data: " + document.getElementById("data").value;
+
+            div.appendChild(name);
+            div.appendChild(email);
+            div.appendChild(CPF);
+            div.appendChild(address);
+            div.appendChild(city);
+            div.appendChild(estado);
+
+            if (moradiaCasa.innerText === "Casa") {
+                div.appendChild(moradiaCasa);
+            }
+            else {
+                div.appendChild(moradiaApartamento);
+            }
+
+            div.appendChild(resumo);
+            div.appendChild(cargo);
+            div.appendChild(descricaoCargo);
+            div.appendChild(data);
+
+            resultado.appendChild(div);
+        }
+
+
+    </script>
+</body>
+
+</html>
