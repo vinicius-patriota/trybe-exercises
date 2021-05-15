@@ -1,0 +1,36 @@
+body {
+    font-size: 20px;
+    margin: 20px;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+img {
+    max-width: 100%;
+}
+
+figure {
+    margin: 30px 0;
+}
+
+@media screen and (min-width: 975px) {
+    figure {
+        display: inline-block;
+    }
+    body {
+        font-size: 25px;
+        background-color: whitesmoke;
+        margin: 30px;
+    }
+}
+
+@media screen and (min-width: 1430px) {
+    body {
+        font-size: 30px;
+        background-color: gray;
+        margin: 40px;
+    }
+}
+ 
