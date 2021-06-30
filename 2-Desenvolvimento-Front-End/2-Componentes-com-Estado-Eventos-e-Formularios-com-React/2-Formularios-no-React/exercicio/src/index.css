@@ -1,0 +1,11 @@
+fieldset {
+    background-color: whitesmoke;
+}
+label {
+    display: block;
+    margin: 10px;
+}
+
+textarea {
+    display: block;
+}
