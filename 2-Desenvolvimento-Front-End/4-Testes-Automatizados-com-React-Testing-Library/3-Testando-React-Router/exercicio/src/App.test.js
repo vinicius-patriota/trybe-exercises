@@ -1,13 +1,13 @@
-import { fireEvent } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import renderWithRouter from './renderWithRouter';
 import App from './App';
 
 describe('Teste de Componentes:', () => {
   test('Verifica se o Component Home e renderizado somente no path="/"', () => {
-    const { getByTestId, history } = renderWithRouter(<App />);
+    const { history } = renderWithRouter(<App />);
 
     history.push('/');
-    const homeContainer = getByTestId('home-container');
+    const homeContainer = screen.getByTestId('home-container');
 
     expect(homeContainer).toBeInTheDocument();
   });
